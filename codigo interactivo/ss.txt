@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sección Interactiva - Cachorros Exóticos</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green-dark:#2d6a3f;
+    --green:#3a8a52;
+    --green-light:#e8f5ec;
+    --gold:#d4a017;
+    --cream:#fdfaf3;
+    --text:#2c2c2c;
+    --muted:#6b7a6f;
+    --border:#e6ede8;
+    --shadow:0 8px 24px rgba(45,106,63,.08);
+    --shadow-lg:0 16px 40px rgba(45,106,63,.14);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Poppins',sans-serif;
+    color:var(--text);
+    background:var(--cream);
+    line-height:1.55;
+    padding:40px 20px;
+  }
+  .wrapper{max-width:1200px;margin:0 auto}
+
+  /* ===== TRUST BAND ===== */
+  .trust-band{
+    background:#fff;
+    border-radius:24px;
+    padding:28px 24px;
+    box-shadow:var(--shadow);
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:16px;
+    margin-bottom:60px;
+    border:1px solid var(--border);
+  }
+  .trust-item{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    padding:8px 12px;
+    border-right:1px dashed var(--border);
+    transition:transform .25s ease;
+  }
+  .trust-item:last-child{border-right:none}
+  .trust-item:hover{transform:translateY(-4px)}
+  .trust-icon{
+    width:54px;height:54px;
+    border-radius:50%;
+    background:var(--green-light);
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:10px;
+    font-size:26px;
+    transition:background .3s ease, transform .4s ease;
+  }
+  .trust-item:hover .trust-icon{
+    background:var(--green);
+    transform:rotate(-8deg) scale(1.05);
+  }
+  .trust-number{
+    font-size:22px;font-weight:800;color:var(--green-dark);
+    line-height:1;
+  }
+  .trust-label{
+    font-size:12px;color:var(--muted);
+    margin-top:4px;font-weight:500;
+    letter-spacing:.3px;
+  }
+
+  /* ===== QUIZ ===== */
+  .quiz-section{
+    background:linear-gradient(135deg,#fff 0%,#f7fbf6 100%);
+    border-radius:32px;
+    padding:48px 40px;
+    box-shadow:var(--shadow-lg);
+    border:1px solid var(--border);
+    position:relative;
+    overflow:hidden;
+  }
+  .quiz-section::before{
+    content:"";
+    position:absolute;
+    top:-80px;right:-80px;
+    width:280px;height:280px;
+    background:radial-gradient(circle,rgba(212,160,23,.12) 0%,transparent 70%);
+    border-radius:50%;
+  }
+  .quiz-section::after{
+    content:"";
+    position:absolute;
+    bottom:-100px;left:-60px;
+    width:240px;height:240px;
+    background:radial-gradient(circle,rgba(58,138,82,.1) 0%,transparent 70%);
+    border-radius:50%;
+  }
+  .quiz-header{text-align:center;margin-bottom:36px;position:relative;z-index:2}
+  .quiz-eyebrow{
+    display:inline-block;
+    background:var(--green-light);
+    color:var(--green-dark);
+    font-size:12px;font-weight:700;
+    letter-spacing:1.2px;
+    padding:6px 16px;
+    border-radius:20px;
+    text-transform:uppercase;
+    margin-bottom:14px;
+  }
+  .quiz-title{
+    font-family:'Pacifico',cursive;
+    font-size:42px;
+    color:var(--gold);
+    margin-bottom:8px;
+    text-shadow:1px 2px 0 rgba(45,106,63,.08);
+  }
+  .quiz-subtitle{
+    color:var(--muted);
+    font-size:15px;
+    max-width:520px;
+    margin:0 auto;
+  }
+
+  .quiz-progress{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    margin:28px 0 32px;
+    position:relative;z-index:2;
+  }
+  .progress-dot{
+    width:36px;height:6px;
+    border-radius:3px;
+    background:var(--border);
+    transition:background .35s ease, width .35s ease;
+  }
+  .progress-dot.active{background:var(--green);width:48px}
+  .progress-dot.done{background:var(--gold)}
+
+  .quiz-step{display:none;position:relative;z-index:2}
+  .quiz-step.active{display:block;animation:fadeUp .4s ease}
+  @keyframes fadeUp{
+    from{opacity:0;transform:translateY(12px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+  .question{
+    font-size:22px;font-weight:700;
+    text-align:center;
+    margin-bottom:28px;
+    color:var(--green-dark);
+  }
+  .options{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:14px;
+    max-width:760px;
+    margin:0 auto;
+  }
+  .option{
+    background:#fff;
+    border:2px solid var(--border);
+    border-radius:18px;
+    padding:22px 16px;
+    cursor:pointer;
+    text-align:center;
+    transition:all .2s ease;
+    font-weight:500;
+    color:var(--text);
+    user-select:none;
+  }
+  .option:hover{
+    border-color:var(--green);
+    transform:translateY(-3px);
+    box-shadow:var(--shadow);
+  }
+  .option.selected{
+    border-color:var(--green);
+    background:var(--green-light);
+    box-shadow:var(--shadow);
+  }
+  .option-emoji{font-size:32px;display:block;margin-bottom:8px}
+  .option-text{font-size:14px;line-height:1.3}
+
+  .quiz-nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    max-width:760px;
+    margin:32px auto 0;
+    gap:12px;
+  }
+  .btn{
+    border:none;
+    padding:14px 28px;
+    border-radius:30px;
+    font-family:inherit;
+    font-weight:600;
+    font-size:14px;
+    cursor:pointer;
+    transition:all .2s ease;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+  }
+  .btn-back{
+    background:transparent;
+    color:var(--muted);
+  }
+  .btn-back:hover{color:var(--green-dark)}
+  .btn-back:disabled{opacity:.3;cursor:not-allowed}
+  .btn-primary{
+    background:var(--green);
+    color:#fff;
+    box-shadow:0 6px 16px rgba(58,138,82,.3);
+  }
+  .btn-primary:hover{
+    background:var(--green-dark);
+    transform:translateY(-2px);
+    box-shadow:0 10px 22px rgba(58,138,82,.4);
+  }
+  .btn-primary:disabled{
+    background:#c9d5cc;
+    cursor:not-allowed;
+    box-shadow:none;
+    transform:none;
+  }
+
+  /* ===== RESULT ===== */
+  .result{display:none;text-align:center;position:relative;z-index:2}
+  .result.show{display:block;animation:fadeUp .5s ease}
+  .result-emoji{font-size:64px;margin-bottom:8px;animation:bounce 1.2s ease infinite alternate}
+  @keyframes bounce{
+    from{transform:translateY(0)}
+    to{transform:translateY(-10px)}
+  }
+  .result-title{
+    font-size:14px;font-weight:600;
+    color:var(--muted);
+    text-transform:uppercase;
+    letter-spacing:1.5px;
+    margin-bottom:6px;
+  }
+  .result-breed{
+    font-family:'Pacifico',cursive;
+    font-size:48px;
+    color:var(--green-dark);
+    margin-bottom:14px;
+  }
+  .result-desc{
+    color:var(--muted);
+    max-width:520px;
+    margin:0 auto 28px;
+    font-size:15px;
+  }
+  .result-actions{
+    display:flex;
+    gap:12px;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+  .btn-whatsapp{
+    background:#25d366;
+    color:#fff;
+    box-shadow:0 6px 16px rgba(37,211,102,.35);
+  }
+  .btn-whatsapp:hover{
+    background:#1eb558;
+    transform:translateY(-2px);
+  }
+  .btn-ghost{
+    background:#fff;
+    color:var(--green-dark);
+    border:2px solid var(--green);
+  }
+  .btn-ghost:hover{background:var(--green-light)}
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width:780px){
+    .trust-band{
+      grid-template-columns:repeat(2,1fr);
+      gap:8px;padding:20px 16px;
+    }
+    .trust-item{border-right:none;border-bottom:1px dashed var(--border);padding-bottom:14px}
+    .trust-item:nth-last-child(-n+2){border-bottom:none}
+    .quiz-section{padding:32px 20px;border-radius:24px}
+    .quiz-title{font-size:32px}
+    .question{font-size:18px}
+    .result-breed{font-size:36px}
+    .options{grid-template-columns:repeat(2,1fr)}
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- ============ TRUST BAND ============ -->
+  <section class="trust-band" aria-label="Garantías">
+    <div class="trust-item">
+      <div class="trust-icon">🐾</div>
+      <div class="trust-number">+500</div>
+      <div class="trust-label">Familias felices</div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">💉</div>
+      <div class="trust-number">100%</div>
+      <div class="trust-label">Vacunas al día</div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">🛡️</div>
+      <div class="trust-number">1 año</div>
+      <div class="trust-label">Garantía de salud</div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">📍</div>
+      <div class="trust-number">24-48h</div>
+      <div class="trust-label">Envío a todo Perú</div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">📋</div>
+      <div class="trust-number">Microchip</div>
+      <div class="trust-label">+ carnet sanitario</div>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="quiz-section" aria-label="Encuentra tu cachorro ideal">
+    <div class="quiz-header">
+      <span class="quiz-eyebrow">★ Test interactivo · 30 segundos</span>
+      <h2 class="quiz-title">¿Qué cachorro es ideal para ti?</h2>
+      <p class="quiz-subtitle">Responde 4 preguntas rápidas y te recomendaremos la raza perfecta para tu estilo de vida.</p>
+    </div>
+
+    <div class="quiz-progress" id="progress">
+      <div class="progress-dot active"></div>
+      <div class="progress-dot"></div>
+      <div class="progress-dot"></div>
+      <div class="progress-dot"></div>
+    </div>
+
+    <!-- STEP 1 -->
+    <div class="quiz-step active" data-step="1">
+      <h3 class="question">¿Dónde vivirá tu cachorro?</h3>
+      <div class="options">
+        <div class="option" data-key="space" data-value="apt">
+          <span class="option-emoji">🏢</span>
+          <span class="option-text">Departamento</span>
+        </div>
+        <div class="option" data-key="space" data-value="house-small">
+          <span class="option-emoji">🏠</span>
+          <span class="option-text">Casa pequeña</span>
+        </div>
+        <div class="option" data-key="space" data-value="house-big">
+          <span class="option-emoji">🏡</span>
+          <span class="option-text">Casa con jardín</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="quiz-step" data-step="2">
+      <h3 class="question">¿Cuánto tiempo le puedes dedicar al día?</h3>
+      <div class="options">
+        <div class="option" data-key="time" data-value="low">
+          <span class="option-emoji">⏰</span>
+          <span class="option-text">Menos de 1 hora</span>
+        </div>
+        <div class="option" data-key="time" data-value="mid">
+          <span class="option-emoji">🕐</span>
+          <span class="option-text">1 a 3 horas</span>
+        </div>
+        <div class="option" data-key="time" data-value="high">
+          <span class="option-emoji">🌟</span>
+          <span class="option-text">Más de 3 horas</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="quiz-step" data-step="3">
+      <h3 class="question">¿Hay niños en casa?</h3>
+      <div class="options">
+        <div class="option" data-key="kids" data-value="yes">
+          <span class="option-emoji">👶</span>
+          <span class="option-text">Sí, niños pequeños</span>
+        </div>
+        <div class="option" data-key="kids" data-value="teens">
+          <span class="option-emoji">🧒</span>
+          <span class="option-text">Sí, adolescentes</span>
+        </div>
+        <div class="option" data-key="kids" data-value="no">
+          <span class="option-emoji">👤</span>
+          <span class="option-text">No</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="quiz-step" data-step="4">
+      <h3 class="question">¿Qué buscas en tu compañero?</h3>
+      <div class="options">
+        <div class="option" data-key="vibe" data-value="calm">
+          <span class="option-emoji">😌</span>
+          <span class="option-text">Tranquilo y cariñoso</span>
+        </div>
+        <div class="option" data-key="vibe" data-value="active">
+          <span class="option-emoji">⚡</span>
+          <span class="option-text">Juguetón y activo</span>
+        </div>
+        <div class="option" data-key="vibe" data-value="loyal">
+          <span class="option-emoji">💚</span>
+          <span class="option-text">Leal y protector</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULT -->
+    <div class="result" id="result">
+      <div class="result-emoji" id="result-emoji">🐶</div>
+      <div class="result-title">Tu match perfecto es</div>
+      <h3 class="result-breed" id="result-breed">Bulldog Francés Exótico</h3>
+      <p class="result-desc" id="result-desc">Compañero ideal: cariñoso, perfecto para departamentos y excelente con niños. Bajo nivel de actividad y muy fácil de cuidar.</p>
+      <div class="result-actions">
+        <button class="btn btn-whatsapp" onclick="window.open('https://wa.me/51920688339?text=Hola!%20Hice%20el%20test%20y%20me%20recomendaron%20un%20'+encodeURIComponent(document.getElementById('result-breed').innerText),'_blank')">
+          💬 Consultar por WhatsApp
+        </button>
+        <button class="btn btn-ghost" onclick="restartQuiz()">↺ Volver a hacer el test</button>
+      </div>
+    </div>
+
+    <!-- NAV -->
+    <div class="quiz-nav" id="quiz-nav">
+      <button class="btn btn-back" id="btn-back" disabled>← Atrás</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Siguiente →</button>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  const answers = {};
+  let currentStep = 1;
+  const totalSteps = 4;
+
+  // Selección de opciones
+  document.querySelectorAll('.option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      const key = opt.dataset.key;
+      // limpia hermanos
+      opt.parentElement.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+      answers[key] = opt.dataset.value;
+      document.getElementById('btn-next').disabled = false;
+    });
+  });
+
+  // Navegación
+  document.getElementById('btn-next').addEventListener('click', () => {
+    if (currentStep < totalSteps) {
+      goToStep(currentStep + 1);
+    } else {
+      showResult();
+    }
+  });
+  document.getElementById('btn-back').addEventListener('click', () => {
+    if (currentStep > 1) goToStep(currentStep - 1);
+  });
+
+  function goToStep(step) {
+    document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+    document.querySelector(`.quiz-step[data-step="${step}"]`).classList.add('active');
+    currentStep = step;
+
+    // progress dots
+    const dots = document.querySelectorAll('.progress-dot');
+    dots.forEach((d, i) => {
+      d.classList.remove('active','done');
+      if (i + 1 < step) d.classList.add('done');
+      else if (i + 1 === step) d.classList.add('active');
+    });
+
+    // botones
+    document.getElementById('btn-back').disabled = step === 1;
+    const stepKey = ['space','time','kids','vibe'][step-1];
+    document.getElementById('btn-next').disabled = !answers[stepKey];
+    document.getElementById('btn-next').innerHTML = step === totalSteps ? 'Ver resultado ✨' : 'Siguiente →';
+  }
+
+  // Lógica de matching simple
+  function calculateMatch() {
+    const {space, time, kids, vibe} = answers;
+    // Bulldog Francés: ideal apt, calm, low/mid time, kids ok
+    // Bulldog Inglés: tranquilo, casa pequeña, kids ok, leal
+    // Pomerania: pequeño, apt, activo, no apto niños muy pequeños
+    // Salchicha: leal, casa, jardín, juguetón
+
+    let scores = {
+      'Bulldog Francés Exótico':0,
+      'Bulldog Inglés Exótico':0,
+      'Pomerania Exótico':0,
+      'Salchicha Exótico':0
+    };
+
+    if (space==='apt'){ scores['Bulldog Francés Exótico']+=3; scores['Pomerania Exótico']+=3; }
+    if (space==='house-small'){ scores['Bulldog Inglés Exótico']+=3; scores['Bulldog Francés Exótico']+=2; }
+    if (space==='house-big'){ scores['Salchicha Exótico']+=3; scores['Bulldog Inglés Exótico']+=2; }
+
+    if (time==='low'){ scores['Bulldog Inglés Exótico']+=3; scores['Bulldog Francés Exótico']+=2; }
+    if (time==='mid'){ scores['Bulldog Francés Exótico']+=2; scores['Pomerania Exótico']+=2; }
+    if (time==='high'){ scores['Salchicha Exótico']+=3; scores['Pomerania Exótico']+=2; }
+
+    if (kids==='yes'){ scores['Bulldog Francés Exótico']+=3; scores['Bulldog Inglés Exótico']+=3; scores['Pomerania Exótico']-=2; }
+    if (kids==='teens'){ scores['Salchicha Exótico']+=2; scores['Pomerania Exótico']+=2; scores['Bulldog Francés Exótico']+=1; }
+    if (kids==='no'){ scores['Pomerania Exótico']+=2; scores['Salchicha Exótico']+=1; }
+
+    if (vibe==='calm'){ scores['Bulldog Inglés Exótico']+=3; scores['Bulldog Francés Exótico']+=2; }
+    if (vibe==='active'){ scores['Pomerania Exótico']+=3; scores['Salchicha Exótico']+=2; }
+    if (vibe==='loyal'){ scores['Salchicha Exótico']+=3; scores['Bulldog Francés Exótico']+=1; }
+
+    return Object.entries(scores).sort((a,b)=>b[1]-a[1])[0][0];
+  }
+
+  const breedInfo = {
+    'Bulldog Francés Exótico':{
+      emoji:'🐾',
+      desc:'Compañero ideal: cariñoso, perfecto para departamentos y excelente con niños. Bajo nivel de actividad, muy sociable y fácil de cuidar.'
+    },
+    'Bulldog Inglés Exótico':{
+      emoji:'🦴',
+      desc:'Tranquilo, leal y muy paciente con niños. Necesita poco ejercicio, perfecto para hogares relajados que buscan un compañero calmado.'
+    },
+    'Pomerania Exótico':{
+      emoji:'✨',
+      desc:'Pequeño, vivaz y juguetón. Ideal para departamentos y dueños activos que disfrutan jugar e interactuar a diario con su mascota.'
+    },
+    'Salchicha Exótico':{
+      emoji:'🌟',
+      desc:'Leal, divertido y muy apegado a su familia. Le encanta jugar y explorar; perfecto para casas con espacio y dueños activos.'
+    }
+  };
+
+  function showResult() {
+    const breed = calculateMatch();
+    document.getElementById('result-breed').innerText = breed;
+    document.getElementById('result-emoji').innerText = breedInfo[breed].emoji;
+    document.getElementById('result-desc').innerText = breedInfo[breed].desc;
+
+    document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+    document.getElementById('quiz-nav').style.display = 'none';
+    document.getElementById('result').classList.add('show');
+
+    // todos los dots como done
+    document.querySelectorAll('.progress-dot').forEach(d => {
+      d.classList.remove('active');
+      d.classList.add('done');
+    });
+  }
+
+  function restartQuiz(){
+    Object.keys(answers).forEach(k => delete answers[k]);
+    document.querySelectorAll('.option.selected').forEach(o => o.classList.remove('selected'));
+    document.getElementById('result').classList.remove('show');
+    document.getElementById('quiz-nav').style.display = 'flex';
+    goToStep(1);
+  }
+</script>
+</body>
+</html>

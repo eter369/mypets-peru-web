@@ -1,0 +1,8 @@
+node_modules/
+.claude/
+*.log
+.DS_Store
+Thumbs.db
+*.tmp
+_temp_*
+_check*
