@@ -3,10 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MyPets Peru - Cachorros de Raza</title>
-  <meta name="description" content="Criadores profesionales certificados. Cachorros de raza con garantía de salud total, genética superior y +500 familias felices. Contáctanos: +51 920 688 338">
+  <title>MyPets Perú | Cachorros de Raza con Garantía — Lima Perú</title>
+  <meta name="description" content="Criadores profesionales certificados en Lima. Cachorros de raza pura con garantía de salud, vacunas, microchip y +500 familias felices. WhatsApp +51 920 688 338.">
+  <meta name="keywords" content="cachorros, perros de raza, criadores Perú, MyPets Perú, comprar cachorro Lima, bulldog francés, pomerania, golden retriever, husky siberiano, garantía de raza">
+  <meta name="author" content="MyPets Perú">
+  <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://mypetsperuoficial.com/">
   <link rel="icon" href="https://mypetsperu.com/wp-content/uploads/2025/10/logo.webp" type="image/webp">
+
+  <!-- Performance: preconnect to external origins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://mypetsperu.com">
+  <link rel="dns-prefetch" href="https://wa.me">
+  <link rel="dns-prefetch" href="https://vumbnail.com">
 
   <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
   <meta property="og:type" content="website">
@@ -30,6 +40,52 @@
   <meta name="twitter:image:alt" content="Cachorros de raza MyPets Perú">
 
   <meta name="theme-color" content="#35762f">
+
+  <!-- JSON-LD: Organization + LocalBusiness -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://mypetsperuoficial.com/#org",
+        "name": "MyPets Perú",
+        "url": "https://mypetsperuoficial.com/",
+        "logo": "https://mypetsperu.com/wp-content/uploads/2025/10/logo.webp",
+        "image": "https://mypetsperuoficial.com/images/og-share.jpg",
+        "description": "Criadores profesionales certificados de cachorros de raza con garantía de salud, genética superior y entrega a domicilio en Perú.",
+        "telephone": "+51 920 688 338",
+        "email": "contacto@mypetsperu.com",
+        "sameAs": []
+      },
+      {
+        "@type": "LocalBusiness",
+        "@id": "https://mypetsperuoficial.com/#business",
+        "name": "MyPets Perú",
+        "image": "https://mypetsperuoficial.com/images/og-share.jpg",
+        "url": "https://mypetsperuoficial.com/",
+        "telephone": "+51 920 688 338",
+        "priceRange": "S/1,400 - S/5,900",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Los Olivos",
+          "addressRegion": "Lima",
+          "addressCountry": "PE"
+        },
+        "areaServed": "PE"
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://mypetsperuoficial.com/#website",
+        "url": "https://mypetsperuoficial.com/",
+        "name": "MyPets Perú",
+        "inLanguage": "es-PE",
+        "publisher": { "@id": "https://mypetsperuoficial.com/#org" }
+      }
+    ]
+  }
+  </script>
+
   <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -2130,7 +2186,7 @@
         </a>
       </div>
       <div class="logo-wrap">
-        <img src="https://mypetsperu.com/wp-content/uploads/2025/10/logo.webp" alt="MyPets Peru" />
+        <img src="https://mypetsperu.com/wp-content/uploads/2025/10/logo.webp" alt="MyPets Peru — Cachorros de Raza" width="120" height="120" fetchpriority="high" decoding="async" />
       </div>
       <button class="cart-btn" onclick="openCart()" aria-label="Abrir carrito de compras" style="position:absolute;right:20px;">
         <span class="cart-icon-wrap">
@@ -2220,11 +2276,11 @@
   <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
   <div class="mobile-menu" id="mobileMenu">
     <div class="mobile-menu-header">
-      <img src="https://mypetsperu.com/wp-content/uploads/2025/10/logo.webp" alt="MyPets" />
+      <img src="https://mypetsperu.com/wp-content/uploads/2025/10/logo.webp" alt="MyPets" loading="lazy" decoding="async" />
       <button class="close-menu" onclick="toggleMobileMenu()">&times;</button>
     </div>
     <div class="mobile-menu-search">
-      <input type="text" placeholder="Busca tu cachorro ideal &#x1F43E;" />
+      <input type="text" placeholder="Busca tu cachorro ideal &#x1F43E;" aria-label="Buscar cachorro" />
     </div>
     <div class="mobile-menu-links">
       <a href="#" class="active-link">Inicio</a>
@@ -2307,7 +2363,7 @@
   <!-- ==================== PRODUCTS - REGULAR ==================== -->
   <section class="products-section" id="cachorros">
     <div class="section-header">
-      <img src="https://mypetsperu.com/wp-content/uploads/2025/10/elementos-11-1300x182.png" alt="Nuestros Cachorros" />
+      <img src="https://mypetsperu.com/wp-content/uploads/2025/10/elementos-11-1300x182.png" alt="Nuestros Cachorros" loading="lazy" decoding="async" />
     </div>
     <div class="carousel-wrapper">
       <button class="carousel-arrow prev" onclick="moveCarousel('regular', -1)" aria-label="Anterior">&#10094;</button>
@@ -2322,7 +2378,7 @@
   <!-- ==================== PRODUCTS - EXOTIC (Más pedidos) ==================== -->
   <section class="products-section exotic-variant" id="exoticos">
     <div class="section-header">
-      <img src="https://mypetsperu.com/wp-content/uploads/2025/10/elementos-12-1300x189.png" alt="Cachorros m&aacute;s pedidos" />
+      <img src="https://mypetsperu.com/wp-content/uploads/2025/10/elementos-12-1300x189.png" alt="Cachorros m&aacute;s pedidos" loading="lazy" decoding="async" />
     </div>
     <div class="carousel-wrapper">
       <button class="carousel-arrow prev" onclick="moveCarousel('exotic', -1)" aria-label="Anterior">&#10094;</button>
@@ -2493,7 +2549,7 @@
   <footer class="footer" id="contacto">
     <div class="footer-inner">
       <div class="footer-logo">
-        <img src="https://mypetsperu.com/wp-content/uploads/2025/10/logo.webp" alt="MyPets Peru" />
+        <img src="https://mypetsperu.com/wp-content/uploads/2025/10/logo.webp" alt="MyPets Peru" loading="lazy" decoding="async" />
       </div>
       <div class="footer-col">
         <h4>Menu</h4>
@@ -2534,7 +2590,7 @@
     <div class="wa-popup">
       <div class="wa-popup-head">
         <div class="wa-popup-avatar">
-          <img src="https://mypetsperu.com/wp-content/uploads/2025/10/logo.webp" alt="MyPets Per&uacute;" />
+          <img src="https://mypetsperu.com/wp-content/uploads/2025/10/logo.webp" alt="MyPets Per&uacute;" loading="lazy" decoding="async" />
         </div>
         <div>
           <div class="wa-popup-name">MyPets Per&uacute;</div>
@@ -2622,7 +2678,7 @@
           <h3>${product.name}</h3>
           <div class="category-tag">${product.category}</div>
           <button class="cart-price-btn" onclick="addToCart('${product.name.replace(/'/g,"\\'")}', ${product.price}, '${product.img}')">
-            <span class="icon"><img src="https://mypetsperu.com/wp-content/uploads/2025/11/cesta-de-la-compra.png" alt="cart" /></span>
+            <span class="icon"><img src="https://mypetsperu.com/wp-content/uploads/2025/11/cesta-de-la-compra.png" alt="" aria-hidden="true" loading="lazy" decoding="async" width="24" height="24" /></span>
             <span class="price">${pf}</span>
           </button>
         </div>
@@ -2738,7 +2794,7 @@
       } else {
         itemsEl.innerHTML = cart.map((item, i) => `
           <div class="cart-item">
-            <img src="${item.img}" alt="${item.name}" />
+            <img src="${item.img}" alt="${item.name}" loading="lazy" decoding="async" />
             <div class="cart-item-info">
               <h4>${item.name}</h4>
               <div class="cart-item-price">S/${(item.price * item.qty).toLocaleString()}</div>
